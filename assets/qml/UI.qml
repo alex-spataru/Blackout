@@ -23,6 +23,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 
 import com.lasconic 1.0
 
@@ -57,6 +58,9 @@ Page {
     // Toolbar and controls
     //
     header: ToolBar {
+        height: 56
+        Material.primary: Qt.darker (drawer.iconBgColorLeft, 1.2)
+
         RowLayout {
             spacing: 3/2 * app.spacing
 
@@ -70,12 +74,18 @@ Page {
             SvgImage {
                 sourceSize: Qt.size (24, 24)
                 source: "qrc:/icons/toolbar/menu.svg"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: drawer.open()
+                }
             }
 
             Label {
                 id: toolbarText
                 color: "#ffffff"
-                font.pixelSize: app.largeLabel
+                font.weight: Font.Medium
+                font.pixelSize: app.mediumLabel
             }
 
             Item {
@@ -90,40 +100,96 @@ Page {
     }
     
     //
+    // Drawer with application name and available pages
+    //
+    PageDrawer {
+        id: drawer
+        iconTitle: AppName
+        iconSource: "qrc:/images/logo.png"
+        iconSubtitle: qsTr ("Version %1 %2").arg (AppVersion).arg (AppChannel)
+
+        onPageSelected: {
+            toolbarTitle = pages.get (pageIndex).pageTitle
+
+            switch (pageIndex) {
+            case 0:
+                while (stack.depth > 1)
+                    stack.pop()
+                break;
+            case 1:
+                stack.push (scores)
+                break;
+            case 2:
+                stack.push (charts)
+                break;
+            case 3:
+                stack.push (settings)
+                break;
+            default:
+                break;
+            }
+        }
+
+        pages: ListModel {
+            id: pagesModel
+
+            ListElement {
+                pageTitle: qsTr ("Home")
+                pageIcon: "qrc:/icons/people.svg"
+            }
+
+            ListElement {
+                pageTitle: qsTr ("Scores Table")
+                pageIcon: "qrc:/icons/scores.svg"
+            }
+
+            ListElement {
+                pageTitle: qsTr ("Charts")
+                pageIcon: "qrc:/icons/chart.svg"
+            }
+
+            ListElement {
+                pageTitle: qsTr ("Settings")
+                pageIcon: "qrc:/icons/settings.svg"
+            }
+        }
+    }
+
+    //
     // Page loader
     //
     StackView {
-        id: stack 
+        id: stack
         initialItem: mainMenu
         
         anchors {
             fill: parent
             margins: app.spacing
-            topMargin: header.height + app.spacing
         }
+
+        popExit: Transition {}
+        popEnter: Transition {}
+        pushExit: Transition {}
+        pushEnter: Transition {}
         
         MainMenu {
             id: mainMenu
             visible: false
-            anchors.fill: parent
         }
         
         Scores {
             id: scores
             visible: false
-            anchors.fill: parent
         }
         
         Charts {
             id: charts
             visible: false
-            anchors.fill: parent
         }
         
         Settings {
             id: settings
             visible: false
-            anchors.fill: parent
         }
     }
     

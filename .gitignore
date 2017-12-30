@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Qt project files
+*.pro.user
+
+# Android deploy configuration
+gradle.properties
+gradle.properties~
+local.properties
+local.properties~

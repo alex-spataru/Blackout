@@ -31,15 +31,12 @@
 #include "QtAdMobInterstitial.h"
 
 #include "AdInfo.h"
+#include "Version.h"
 #include "Translator.h"
 
 int main (int argc, char** argv)
 {
-    QGuiApplication::setApplicationVersion ("1.0.0");
-    QGuiApplication::setOrganizationName ("Alex Spataru");
-    QGuiApplication::setApplicationName ("Blackout Score Keeper");
     QGuiApplication::setAttribute (Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app (argc, argv);
 
     ShareUtils::DeclareQML();
@@ -52,9 +49,10 @@ int main (int argc, char** argv)
     engine.rootContext()->setContextProperty ("BannerId", BANNER_ID);
     engine.rootContext()->setContextProperty ("DevicePixelRatio", dpr);
     engine.rootContext()->setContextProperty ("AdsEnabled", ADS_ENABLED);
-    engine.rootContext()->setContextProperty ("AppName", app.applicationName());
-    engine.rootContext()->setContextProperty ("Company", app.organizationName());
-    engine.rootContext()->setContextProperty ("Version", app.applicationVersion());
+    engine.rootContext()->setContextProperty ("AppName", APP_NAME);
+    engine.rootContext()->setContextProperty ("AppChannel", APP_CHANNEL);
+    engine.rootContext()->setContextProperty ("AppVersion", APP_VERSION);
+    engine.rootContext()->setContextProperty ("AppDeveloper", APP_DEVELOPER);
     engine.load (QUrl (QStringLiteral ("qrc:/qml/main.qml")));
 
     if (engine.rootObjects().isEmpty())

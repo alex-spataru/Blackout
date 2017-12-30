@@ -34,7 +34,7 @@ OBJECTS_DIR = obj
 #-------------------------------------------------------------------------------
 
 TEMPLATE = app
-TARGET = blackout-scores
+TARGET = whist-score-keeper
 
 CONFIG += qtc_runnable
 CONFIG += resources_big
@@ -61,6 +61,7 @@ include ($$PWD/lib/ShareUtils-QML/ShareUtils-QML.pri)
 
 HEADERS += \
     $$PWD/src/AdInfo.h \
+    $$PWD/src/Version.h \
     $$PWD/src/Translator.h
 
 SOURCES += \
@@ -69,7 +70,8 @@ SOURCES += \
 
 RESOURCES += \
     $$PWD/assets/qml/qml.qrc \
-    assets/icons/icons.qrc
+    $$PWD/assets/icons/icons.qrc \
+    $$PWD/assets/images/images.qrc
 
 OTHER_FILES += \
     $$PWD/assets/qml/*.qml \

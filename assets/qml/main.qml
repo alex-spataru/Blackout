@@ -39,8 +39,9 @@ ApplicationWindow {
     //
     readonly property int spacing: 8
     readonly property int smallLabel: 12
-    readonly property int largeLabel: 18
-    readonly property int mediumLabel: 14
+    readonly property int largeLabel: 22
+    readonly property int mediumLabel: 18
+    readonly property int normalLabel: 16
     readonly property int extraSmallLabel: 10
     readonly property int extraLargeLabel: 24
     readonly property alias bannerHeight: ads.bannerHeight

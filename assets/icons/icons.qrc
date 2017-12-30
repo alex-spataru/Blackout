@@ -13,5 +13,6 @@
         <file>toolbar/back.svg</file>
         <file>toolbar/menu.svg</file>
         <file>toolbar/more.svg</file>
+        <file>scores.svg</file>
     </qresource>
 </RCC>

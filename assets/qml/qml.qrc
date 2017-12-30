@@ -8,5 +8,6 @@
         <file>Pages/MainMenu.qml</file>
         <file>Pages/Scores.qml</file>
         <file>Pages/Settings.qml</file>
+        <file>PageDrawer.qml</file>
     </qresource>
 </RCC>

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.alexspataru.supertac" android:versionName="1.5.3" android:versionCode="153" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.alexspataru.rwsk" android:versionName="0.1.2" android:versionCode="12" android:installLocation="auto">
   <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
-  <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Minimal Tic Tac Toe" android:icon="@mipmap/ic_launcher">
+  <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Whist Score Keeper" android:icon="@mipmap/ic_launcher">
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
-    <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:name="org.dreamdev.QtAdMob.QtAdMobActivity" android:label="Minimal Tic Tac Toe" android:screenOrientation="portrait" android:launchMode="singleTop">
+    <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:name="org.dreamdev.QtAdMob.QtAdMobActivity" android:label="Whist Score Keeper" android:screenOrientation="portrait" android:launchMode="singleTop">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-      <meta-data android:name="android.app.lib_name" android:value="minimal3t"/>
+      <meta-data android:name="android.app.lib_name" android:value="whist-score-keeper"/>
       <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
       <meta-data android:name="android.app.repository" android:value="default"/>
       <meta-data android:name="android.app.qt_libs_resource_id" android:resource="@array/qt_libs"/>
@@ -30,8 +30,8 @@
       <meta-data android:name="android.app.auto_screen_scale_factor" android:value="false"/>
       <meta-data android:name="android.app.extract_android_style" android:value="minimal"/>
     </activity>
-    <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" android:label="Minimal Tic Tac Toe">
-      <meta-data android:name="android.app.lib_name" android:value="minimal3t"/>
+    <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" android:label="Whist Score Keeper">
+      <meta-data android:name="android.app.lib_name" android:value="whist-score-keeper"/>
     </activity>
   </application>
   <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
