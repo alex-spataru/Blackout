@@ -21,11 +21,26 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 
 Item {
-    Label {
-        text: qsTr ("Scores")
+    ColumnLayout {
+        spacing: app.spacing
         anchors.centerIn: parent
+
+        Label {
+            text: qsTr ("Scores")
+            font.weight: Font.Medium
+            font.pixelSize: app.largeLabel
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Label {
+            opacity: 0.54
+            font.pixelSize: app.normalLabel
+            text: qsTr ("This feature is under development")
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
 }

@@ -52,6 +52,7 @@ int main (int argc, char** argv)
     engine.rootContext()->setContextProperty ("AppName", APP_NAME);
     engine.rootContext()->setContextProperty ("AppChannel", APP_CHANNEL);
     engine.rootContext()->setContextProperty ("AppVersion", APP_VERSION);
+    engine.rootContext()->setContextProperty ("TestDevices", TEST_DEVICES);
     engine.rootContext()->setContextProperty ("AppDeveloper", APP_DEVELOPER);
     engine.load (QUrl (QStringLiteral ("qrc:/qml/main.qml")));
 

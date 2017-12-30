@@ -135,7 +135,7 @@ Page {
 
             ListElement {
                 pageTitle: qsTr ("Home")
-                pageIcon: "qrc:/icons/people.svg"
+                pageIcon: "qrc:/icons/home.svg"
             }
 
             ListElement {
@@ -160,7 +160,7 @@ Page {
     //
     StackView {
         id: stack
-        initialItem: mainMenu
+        initialItem: home
         
         anchors {
             fill: parent
@@ -172,8 +172,8 @@ Page {
         pushExit: Transition {}
         pushEnter: Transition {}
         
-        MainMenu {
-            id: mainMenu
+        Home {
+            id: home
             visible: false
         }
         

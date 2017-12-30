@@ -28,28 +28,25 @@ Item {
     id: ads
 
     //
-    // Constant value (which is used by other components to
-    // adapt the UI to shown ads
+    // Custom values (which is used by other components to adapt the UI to shown ads)
     //
-    readonly property int bannerHeight: AdsEnabled ? 50 : 0
+    readonly property int bannerHeight: 50
+    readonly property int sbHeight: Screen.height - Screen.desktopAvailableHeight
+    property int adHeight: AdsEnabled && ad.isLoaded && ad.visible ? bannerHeight : 0
+
+    //
+    // Move UI slowly while the ad loads
+    //
+    Behavior on adHeight { NumberAnimation {duration: 250} }
 
     //
     // Locates the banner on the bottom of the screen
     //
     function locateBanner() {
-        var w = bannerAd.width / DevicePixelRatio
-        var h = bannerAd.height / DevicePixelRatio
-
-        if (AdsEnabled) {
-            var sbHeight = Screen.height - Screen.desktopAvailableHeight
-            bannerAd.x = (app.width - w) * DevicePixelRatio / 2
-            bannerAd.y = (app.height - h - app.spacing + sbHeight + 1) * DevicePixelRatio
-        }
-
-        else {
-            bannerAd.x = app.width * 2 * DevicePixelRatio
-            bannerAd.y = app.height * 2 * DevicePixelRatio
-        }
+        if (AdsEnabled)
+            ad.y = (app.height - bannerHeight + sbHeight) * DevicePixelRatio
+        else
+            ad.y = app.height * 2 * DevicePixelRatio
     }
 
     //
@@ -57,7 +54,6 @@ Item {
     //
     Connections {
         target: app
-        onWidthChanged: locateBanner()
         onHeightChanged: locateBanner()
     }
 
@@ -66,19 +62,21 @@ Item {
     //
     Component.onCompleted: {
         locateBanner()
-        bannerAd.visible = AdsEnabled
+        ad.visible = AdsEnabled
+        for (var i = 0; i < TestDevices.length; ++i)
+            ad.addTestDevice (TestDevices [i])
     }
 
     //
     // Banner ad
     //
     AdMobBanner {
-        id: bannerAd
+        id: ad
         onLoaded: locateBanner()
         Component.onCompleted: {
-            visible = true
             unitId = BannerId
-            size = AdMobBanner.Banner
+            visible = AdsEnabled
+            size = AdMobBanner.SmartBanner
         }
     }
 }

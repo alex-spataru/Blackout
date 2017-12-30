@@ -44,7 +44,7 @@ ApplicationWindow {
     readonly property int normalLabel: 16
     readonly property int extraSmallLabel: 10
     readonly property int extraLargeLabel: 24
-    readonly property alias bannerHeight: ads.bannerHeight
+    readonly property alias bannerHeight: ads.adHeight
     
     //
     // Display the application window on launch

@@ -91,8 +91,9 @@ linux:!android {
 }
 
 android {
-    #android:DEFINES += PREMIUM
-    android:DEFINES += ENABLE_REAL_ADS
+   #android:DEFINES += NO_ADS
+   #android:DEFINES += REAL_ADS
+    android:DEFINES += TEST_ADS
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/deploy/android
     android:DISTFILES += \

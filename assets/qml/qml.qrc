@@ -5,9 +5,9 @@
         <file>UI.qml</file>
         <file>Components/SvgImage.qml</file>
         <file>Pages/Charts.qml</file>
-        <file>Pages/MainMenu.qml</file>
         <file>Pages/Scores.qml</file>
         <file>Pages/Settings.qml</file>
         <file>PageDrawer.qml</file>
+        <file>Pages/Home.qml</file>
     </qresource>
 </RCC>
