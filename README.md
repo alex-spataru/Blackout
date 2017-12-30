@@ -1,4 +1,4 @@
-# Romanian Whist Score Keeper
+# Whist Score Keeper
 
 A simple application for Android that allows you to keep the score of a Romanian Whist game and analize the performance of each player.
 
