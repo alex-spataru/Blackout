@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>Ads.qml</file>
+        <file>main.qml</file>
+        <file>UI.qml</file>
+        <file>Components/SvgImage.qml</file>
+        <file>Pages/Charts.qml</file>
+        <file>Pages/MainMenu.qml</file>
+        <file>Pages/Scores.qml</file>
+        <file>Pages/Settings.qml</file>
+    </qresource>
+</RCC>
