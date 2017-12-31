@@ -89,7 +89,7 @@ ApplicationWindow {
     //
     function removeAds() {
         if (Qt.platform.os === "android")
-            Qt.openUrlExternally ("market:details?id=" + AppId + "noads")
+            Qt.openUrlExternally ("market://details?id=" + AppId + "noads")
         else
             Qt.openUrlExternally ("https://github.com/alex-spataru/romanian-whist")
     }
@@ -99,7 +99,7 @@ ApplicationWindow {
     //
     function openRate() {
         if (Qt.platform.os === "android")
-            Qt.openUrlExternally ("market:details?id=" + AppId)
+            Qt.openUrlExternally ("market://details?id=" + AppId)
         else
             Qt.openUrlExternally ("https://github.com/alex-spataru/romanian-whist")
     }
