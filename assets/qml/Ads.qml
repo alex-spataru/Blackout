@@ -22,6 +22,8 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import QtGraphicalEffects 1.0
+import QtQuick.Controls.Material 2.0
 import com.dreamdev.QtAdMobBanner 1.0
 
 Item {
@@ -33,6 +35,12 @@ Item {
     readonly property int bannerHeight: 50
     readonly property int sbHeight: Screen.height - Screen.desktopAvailableHeight
     property int adHeight: AdsEnabled && ad.isLoaded && ad.visible ? bannerHeight : 0
+
+    //
+    // Banner ad background rectangle colors
+    //
+    property color bgColorLeft: "#de6262"
+    property color bgColorRight: "#ffb850"
 
     //
     // Move UI slowly while the ad loads
@@ -65,6 +73,43 @@ Item {
         ad.visible = AdsEnabled
         for (var i = 0; i < TestDevices.length; ++i)
             ad.addTestDevice (TestDevices [i])
+    }
+
+    //
+    // Background for ad
+    //
+    Rectangle {
+        height: adHeight
+        Material.elevation: 1000
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        LinearGradient {
+            anchors.fill: parent
+            start: Qt.point (0, 0)
+            end: Qt.point (parent.width, 0)
+
+            gradient: Gradient {
+                GradientStop { position: 0; color: bgColorLeft }
+                GradientStop { position: 1; color: bgColorRight }
+            }
+        }
+
+        Rectangle {
+            height: 0.5
+            color: "#222"
+
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                margins: -1 * height
+            }
+        }
     }
 
     //

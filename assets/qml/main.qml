@@ -45,7 +45,7 @@ ApplicationWindow {
     readonly property int extraSmallLabel: 10
     readonly property int extraLargeLabel: 24
     readonly property alias bannerHeight: ads.adHeight
-    readonly property int effectiveHeight: height - bannerHeight
+    readonly property int effectiveHeight: height - bannerHeight - 1
     
     //
     // Display the application window on launch
@@ -120,7 +120,7 @@ ApplicationWindow {
     UI {
         id: ui
         anchors.fill: parent
-        anchors.bottomMargin: app.spacing + bannerHeight
+        anchors.bottomMargin: app.height - app.effectiveHeight
     }
 
     //

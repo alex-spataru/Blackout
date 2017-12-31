@@ -201,7 +201,6 @@ Page {
 
             ListElement {
                 separator: true
-                separatorText: qsTr ("Test")
             }
 
             ListElement {

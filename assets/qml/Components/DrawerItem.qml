@@ -110,10 +110,6 @@ ItemDelegate {
         visible: isSeparator (index)
         anchors.verticalCenter: parent.verticalCenter
 
-        Item {
-            Layout.fillHeight: true
-        }
-
         Rectangle {
             height: 0.5
             opacity: 0.20
@@ -137,10 +133,6 @@ ItemDelegate {
                 left: parent.left
                 right: parent.right
             }
-        }
-
-        Item {
-            Layout.fillHeight: true
         }
     }
 

@@ -27,6 +27,7 @@ import QtGraphicalEffects 1.0
 
 Drawer {
     id: drawer
+    clip: true
 
     //
     // Default size options
@@ -112,7 +113,7 @@ Drawer {
         // Icon controls
         //
         Rectangle {
-            z: 1
+            z: 2
             height: 120
             id: iconRect
             Layout.fillWidth: true
