@@ -45,9 +45,9 @@ Page {
     //
     function checkStackDepth() {
         if (Qt.platform.os == "android") {
-            if (stack.depth > 1) {
-                stack.pop()
-                return false
+            if (drawer.pageIndex != 0) {
+                drawer.pageIndex = 0
+                return false;
             }
         }
 
@@ -73,7 +73,7 @@ Page {
 
             SvgImage {
                 sourceSize: Qt.size (24, 24)
-                source: "qrc:/icons/toolbar/menu.svg"
+                source: "qrc:/icons/menu.svg"
 
                 MouseArea {
                     anchors.fill: parent
@@ -94,7 +94,37 @@ Page {
 
             SvgImage {
                 sourceSize: Qt.size (24, 24)
-                source: "qrc:/icons/toolbar/more.svg"
+                source: "qrc:/icons/more.svg"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: menu.open()
+                }
+
+                Menu {
+                    id: menu
+                    x: app.width - width
+                    transformOrigin: Menu.TopRight
+                    width: implicitWidth * app.scaleRatio
+
+                    MenuItem {
+                        onClicked: app.startNewGame()
+                        text: qsTr ("New Game") + Translator.dummy
+                    }
+
+                    MenuItem {
+                        onClicked: drawer.pageIndex = 4
+                        text: qsTr ("Settings") + Translator.dummy
+                    }
+
+                    MenuItem {
+                        visible: enabled
+                        enabled: AdsEnabled
+                        onClicked: app.removeAds()
+                        height: enabled ? implicitHeight : 0
+                        text: qsTr ("Remove Ads") + Translator.dummy
+                    }
+                }
             }
         }
     }
@@ -105,16 +135,23 @@ Page {
     PageDrawer {
         id: drawer
         iconTitle: AppName
+        height: app.effectiveHeight
         iconSource: "qrc:/images/logo.png"
         iconSubtitle: qsTr ("Version %1 %2").arg (AppVersion).arg (AppChannel)
 
-        onPageSelected: {
-            toolbarTitle = pages.get (pageIndex).pageTitle
+        onPageIndexChanged: {
+            var indexesWithPages = [0, 1, 2, 3, 4]
+            for (var i = 0; i < indexesWithPages.length; ++i) {
+                if (pageIndex === indexesWithPages [i]) {
+                    stack.clear()
+                    toolbarTitle = pages.get (pageIndex).pageTitle
+                    break
+                }
+            }
 
             switch (pageIndex) {
             case 0:
-                while (stack.depth > 1)
-                    stack.pop()
+                stack.push (home)
                 break;
             case 1:
                 stack.push (scores)
@@ -123,9 +160,23 @@ Page {
                 stack.push (charts)
                 break;
             case 3:
+                stack.push (leaderboard)
+                break;
+            case 4:
                 stack.push (settings)
                 break;
-            default:
+            case 5:
+            case 6:
+                /* Separator and spacer, do nothing */
+                break;
+            case 7:
+                app.learnWhist();
+                break;
+            case 8:
+                app.reportBug()
+                break;
+            case 9:
+                app.openRate()
                 break;
             }
         }
@@ -149,8 +200,39 @@ Page {
             }
 
             ListElement {
+                pageTitle: qsTr ("Leaderboard")
+                pageIcon: "qrc:/icons/people.svg"
+            }
+
+            ListElement {
                 pageTitle: qsTr ("Settings")
                 pageIcon: "qrc:/icons/settings.svg"
+            }
+
+            ListElement {
+                spacer: true
+            }
+
+            ListElement {
+                separator: true
+            }
+
+            ListElement {
+                link: true
+                pageIcon: "qrc:/icons/help.svg"
+                pageTitle: qsTr ("Learn Romanian Whist")
+            }
+
+            ListElement {
+                link: true
+                pageIcon: "qrc:/icons/bug.svg"
+                pageTitle: qsTr ("Feature Requests / Bugs")
+            }
+
+            ListElement {
+                link: true
+                pageIcon: "qrc:/icons/star.svg"
+                pageTitle: qsTr ("Rate This App")
             }
         }
     }
@@ -184,6 +266,11 @@ Page {
         
         Charts {
             id: charts
+            visible: false
+        }
+
+        Leaderboard {
+            id: leaderboard
             visible: false
         }
         

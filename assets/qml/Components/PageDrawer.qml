@@ -23,6 +23,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
+import QtGraphicalEffects 1.0
 
 Drawer {
     id: drawer
@@ -30,9 +31,9 @@ Drawer {
     //
     // Default size options
     //
-    implicitHeight: app.height
-    implicitWidth: Math.min (app.width > app.height ? 320 : 280,
-                                                      Math.min (app.width, app.height) * 0.90)
+    implicitHeight: app.effectiveHeight
+    implicitWidth: Math.min (parent.width > parent.height ? 320 : 280,
+                             Math.min (parent.width, parent.height) * 0.90)
 
     //
     // Icon properties
@@ -46,16 +47,15 @@ Drawer {
 
     //
     // List model that generates the page selector
-    // Options of each element are:
+    // Options for selector items are:
+    //     - spacer: acts an expanding spacer between to items
     //     - pageTitle: the text to display
+    //     - separator: if the element shall be a separator item
+    //     - separatorText: optional text for the separator item
     //     - pageIcon: the source of the image to display next to the title
     //
-    property alias pages: pageSelector.model
-
-    //
-    // Emitted when the user clicks on one of the pages
-    //
-    signal pageSelected (var pageIndex)
+    property alias pages: listView.model
+    property alias pageIndex: listView.currentIndex
 
     //
     // Main layout of the drawer
@@ -70,18 +70,22 @@ Drawer {
         //
         Rectangle {
             z: 1
+            height: 120
+            id: iconRect
             Layout.fillWidth: true
-            Layout.minimumHeight: 120
 
             Rectangle {
-                rotation: 90
-                width: parent.height
-                height: parent.width + 1
-                anchors.centerIn: parent
+                anchors.fill: parent
 
-                gradient: Gradient {
-                    GradientStop { position: 1; color: iconBgColorLeft }
-                    GradientStop { position: 0; color: iconBgColorRight }
+                LinearGradient {
+                    anchors.fill: parent
+                    start: Qt.point (0, 0)
+                    end: Qt.point (parent.width, 0)
+
+                    gradient: Gradient {
+                        GradientStop { position: 1; color: iconBgColorLeft }
+                        GradientStop { position: 0; color: iconBgColorRight }
+                    }
                 }
             }
 
@@ -139,54 +143,23 @@ Drawer {
         //
         ListView {
             z: 0
-            id: pageSelector
+            id: listView
             currentIndex: -1
             Layout.fillWidth: true
             Layout.fillHeight: true
             Component.onCompleted: currentIndex = 0
-            onCurrentIndexChanged: pageSelected (currentIndex)
 
-            delegate: ItemDelegate {
+            delegate: DrawerItem {
+                model: pages
                 width: parent.width
-                highlighted: ListView.isCurrentItem
+                pageSelector: listView
 
                 onClicked: {
-                    if (pageSelector.currentIndex != index)
-                        pageSelector.currentIndex = index
+                    if (listView.currentIndex !== index)
+                        listView.currentIndex = index
 
                     drawer.close()
                 }
-
-                RowLayout {
-                    spacing: 16
-                    anchors.margins: 16
-                    anchors.fill: parent
-
-                    Image {
-                        smooth: true
-                        opacity: 0.54
-                        source: pageIcon
-                        fillMode: Image.Pad
-                        sourceSize: Qt.size (24, 24)
-                        verticalAlignment: Image.AlignVCenter
-                        horizontalAlignment: Image.AlignHCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-
-                    Item {
-                        width: 36 - (2 * spacing)
-                    }
-
-                    Label {
-                        opacity: 0.87
-                        text: pageTitle
-                        font.pixelSize: 14
-                        Layout.fillWidth: true
-                        font.weight: Font.Medium
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                }
-
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }

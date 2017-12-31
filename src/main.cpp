@@ -39,17 +39,22 @@ int main (int argc, char** argv)
     QGuiApplication::setAttribute (Qt::AA_EnableHighDpiScaling);
     QGuiApplication app (argc, argv);
 
+    Translator::DeclareQML();
     ShareUtils::DeclareQML();
     QmlAdMobBanner::DeclareQML();
     QmlAdMobInterstitial::DeclareQML();
     qreal dpr = app.primaryScreen()->devicePixelRatio();
 
+    Translator translator;
+
     QQmlApplicationEngine engine;
     QQuickStyle::setStyle ("Material");
+    engine.rootContext()->setContextProperty ("AppId", APP_ID);
     engine.rootContext()->setContextProperty ("BannerId", BANNER_ID);
     engine.rootContext()->setContextProperty ("DevicePixelRatio", dpr);
     engine.rootContext()->setContextProperty ("AdsEnabled", ADS_ENABLED);
     engine.rootContext()->setContextProperty ("AppName", APP_NAME);
+    engine.rootContext()->setContextProperty ("Translator", &translator);
     engine.rootContext()->setContextProperty ("AppChannel", APP_CHANNEL);
     engine.rootContext()->setContextProperty ("AppVersion", APP_VERSION);
     engine.rootContext()->setContextProperty ("TestDevices", TEST_DEVICES);

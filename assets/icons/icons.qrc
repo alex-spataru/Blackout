@@ -3,17 +3,17 @@
         <file>chart.svg</file>
         <file>chevron-left.svg</file>
         <file>chevron-right.svg</file>
-        <file>info.svg</file>
         <file>people.svg</file>
         <file>settings.svg</file>
         <file>share.svg</file>
         <file>star.svg</file>
         <file>trend-down.svg</file>
         <file>trend-up.svg</file>
-        <file>toolbar/back.svg</file>
-        <file>toolbar/menu.svg</file>
-        <file>toolbar/more.svg</file>
         <file>scores.svg</file>
         <file>home.svg</file>
+        <file>help.svg</file>
+        <file>bug.svg</file>
+        <file>menu.svg</file>
+        <file>more.svg</file>
     </qresource>
 </RCC>

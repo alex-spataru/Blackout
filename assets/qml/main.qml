@@ -45,12 +45,13 @@ ApplicationWindow {
     readonly property int extraSmallLabel: 10
     readonly property int extraLargeLabel: 24
     readonly property alias bannerHeight: ads.adHeight
+    readonly property int effectiveHeight: height - bannerHeight
     
     //
     // Display the application window on launch
     //
     Component.onCompleted: {
-        if (Qt.platform === "android")
+        if (Qt.platform.os === "android")
             showMaximized()
         else
             showNormal()
@@ -61,6 +62,47 @@ ApplicationWindow {
     // This allows the Android user to use the back button to navigate the UI
     //
     onClosing: close.accepted = ui.checkStackDepth()
+
+    //
+    // Opens a link that allows the user to report a bug
+    //
+    function reportBug() {
+        Qt.openUrlExternally ("https://github.com/alex-spataru/romanian-whist/issues")
+    }
+
+    //
+    // Opens a link that allows the user to learn whist (in theory)
+    //
+    function learnWhist() {
+        Qt.openUrlExternally ("http://www.bridgeguys.com/WGlossary/WhistRomania.html")
+    }
+
+    //
+    // Clears the current data and starts a new game
+    //
+    function startNewGame() {
+
+    }
+
+    //
+    // Opens an URL to install the ad-free version of the app
+    //
+    function removeAds() {
+        if (Qt.platform.os === "android")
+            Qt.openUrlExternally ("market:details?id=" + AppId + "noads")
+        else
+            Qt.openUrlExternally ("https://github.com/alex-spataru/romanian-whist")
+    }
+
+    //
+    // Opens a link that allows the user to rate the application
+    //
+    function openRate() {
+        if (Qt.platform.os === "android")
+            Qt.openUrlExternally ("market:details?id=" + AppId)
+        else
+            Qt.openUrlExternally ("https://github.com/alex-spataru/romanian-whist")
+    }
 
     //
     // Save settings between runs

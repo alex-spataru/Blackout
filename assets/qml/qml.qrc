@@ -7,7 +7,9 @@
         <file>Pages/Charts.qml</file>
         <file>Pages/Scores.qml</file>
         <file>Pages/Settings.qml</file>
-        <file>PageDrawer.qml</file>
         <file>Pages/Home.qml</file>
+        <file>Pages/Leaderboard.qml</file>
+        <file>Components/DrawerItem.qml</file>
+        <file>Components/PageDrawer.qml</file>
     </qresource>
 </RCC>

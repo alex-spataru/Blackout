@@ -20,24 +20,27 @@
  * THE SOFTWARE.
  */
 
-#ifndef _APP_VERSION_H
-#define _APP_VERSION_H
+import QtQuick 2.0
+import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.0
 
-#include <QString>
+Item {
+    ColumnLayout {
+        spacing: app.spacing
+        anchors.centerIn: parent
 
-static const QString APP_CHANNEL   = "Alpha";
-static const QString APP_VERSION   = "0.1.2";
-static const QString APP_DEVELOPER = "Alex Spataru";
-static const QString APP_NAME      = "Whist Score Keeper";
+        Label {
+            text: qsTr ("Leaderboard")
+            font.weight: Font.Medium
+            font.pixelSize: app.largeLabel
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
-#if defined (Q_OS_ANDROID)
-    #if defined (NO_ADS)
-        static const QString APP_ID = "com.alexspataru.rwsknoads";
-    #else
-        static const QString APP_ID = "com.alexspataru.rwsk";
-    #endif
-#else
-    static const QString APP_ID = "com.alexspataru.rwsk";
-#endif
-
-#endif
+        Label {
+            opacity: 0.54
+            font.pixelSize: app.normalLabel
+            text: qsTr ("This feature is under development")
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+}
