@@ -31,9 +31,9 @@ Drawer {
     //
     // Default size options
     //
-    implicitHeight: app.effectiveHeight
+    implicitHeight: parent.height
     implicitWidth: Math.min (parent.width > parent.height ? 320 : 280,
-                                                            Math.min (parent.width, parent.height) * 0.90)
+                             Math.min (parent.width, parent.height) * 0.90)
 
     //
     // Icon properties
@@ -126,28 +126,28 @@ Drawer {
                     end: Qt.point (parent.width, 0)
 
                     gradient: Gradient {
-                        GradientStop { position: 1; color: iconBgColorLeft }
-                        GradientStop { position: 0; color: iconBgColorRight }
+                        GradientStop { position: 0; color: iconBgColorLeft }
+                        GradientStop { position: 1; color: iconBgColorRight }
                     }
                 }
             }
 
             RowLayout {
-                spacing: app.spacing * 2
+                spacing: 16
 
                 anchors {
                     fill: parent
                     centerIn: parent
-                    margins: 2 * app.spacing
+                    margins: 16
                 }
 
-                Image {
+                SvgImage {
                     source: iconSource
                     sourceSize: iconSize
                 }
 
                 ColumnLayout {
-                    spacing: app.spacing
+                    spacing: 8
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
@@ -159,14 +159,14 @@ Drawer {
                         color: "#fff"
                         text: iconTitle
                         font.weight: Font.Medium
-                        font.pixelSize: app.normalLabel
+                        font.pixelSize: 16
                     }
 
                     Label {
                         color: "#fff"
                         opacity: 0.87
                         text: iconSubtitle
-                        font.pixelSize: app.smallLabel
+                        font.pixelSize: 12
                     }
 
                     Item {

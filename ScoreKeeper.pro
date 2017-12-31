@@ -75,7 +75,8 @@ RESOURCES += \
 
 OTHER_FILES += \
     $$PWD/assets/qml/*.qml \
-    $$PWD/assets/qml/Pages/*.qml
+    $$PWD/assets/qml/Pages/*.qml \
+    $$PWD/assets/qml/Components/*.qml
 
 #-------------------------------------------------------------------------------
 # Deploy configurations

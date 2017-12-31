@@ -145,7 +145,7 @@ Page {
         id: drawer
         iconTitle: AppName
         height: app.effectiveHeight
-        iconSource: "qrc:/images/logo.png"
+        iconSource: "qrc:/images/logo.svg"
         iconSubtitle: qsTr ("Version %1 %2").arg (AppVersion).arg (AppChannel)
 
         //
@@ -201,6 +201,7 @@ Page {
 
             ListElement {
                 separator: true
+                separatorText: qsTr ("Test")
             }
 
             ListElement {
