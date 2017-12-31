@@ -37,6 +37,15 @@ Page {
     // Custom properties
     //
     property alias toolbarTitle: toolbarText.text
+
+    //
+    // Loads the given page and changes the toolbar title
+    //
+    function loadPage (page, index) {
+        stack.clear()
+        toolbarTitle = drawer.items.get (index).pageTitle
+        stack.push (page)
+    }
     
     //
     // Decreases the stack depth when running on Android,
@@ -45,8 +54,8 @@ Page {
     //
     function checkStackDepth() {
         if (Qt.platform.os == "android") {
-            if (drawer.pageIndex != 0) {
-                drawer.pageIndex = 0
+            if (drawer.index != 0) {
+                drawer.index = 0
                 return false;
             }
         }
@@ -113,7 +122,7 @@ Page {
                     }
 
                     MenuItem {
-                        onClicked: drawer.pageIndex = 4
+                        onClicked: drawer.index = 4
                         text: qsTr ("Settings") + Translator.dummy
                     }
 
@@ -139,49 +148,26 @@ Page {
         iconSource: "qrc:/images/logo.png"
         iconSubtitle: qsTr ("Version %1 %2").arg (AppVersion).arg (AppChannel)
 
-        onPageIndexChanged: {
-            var indexesWithPages = [0, 1, 2, 3, 4]
-            for (var i = 0; i < indexesWithPages.length; ++i) {
-                if (pageIndex === indexesWithPages [i]) {
-                    stack.clear()
-                    toolbarTitle = pages.get (pageIndex).pageTitle
-                    break
-                }
-            }
-
-            switch (pageIndex) {
-            case 0:
-                stack.push (home)
-                break;
-            case 1:
-                stack.push (scores)
-                break;
-            case 2:
-                stack.push (charts)
-                break;
-            case 3:
-                stack.push (leaderboard)
-                break;
-            case 4:
-                stack.push (settings)
-                break;
-            case 5:
-            case 6:
-                /* Separator and spacer, do nothing */
-                break;
-            case 7:
-                app.learnWhist();
-                break;
-            case 8:
-                app.reportBug()
-                break;
-            case 9:
-                app.openRate()
-                break;
-            }
+        //
+        // Define the actions to take for each drawer item
+        // Drawers 5 and 6 are ignored, because they are used for
+        // displaying a spacer and a separator
+        //
+        actions: {
+            0: function() { loadPage (home, 0) },
+            1: function() { loadPage (scores, 1) },
+            2: function() { loadPage (charts, 2) },
+            3: function() { loadPage (leaderboard, 3) },
+            4: function() { loadPage (settings, 4) },
+            7: function() { app.learnWhist() },
+            8: function() { app.reportBug() },
+            9: function() { app.rateApp() }
         }
 
-        pages: ListModel {
+        //
+        // Define the drawer items
+        //
+        items: ListModel {
             id: pagesModel
 
             ListElement {

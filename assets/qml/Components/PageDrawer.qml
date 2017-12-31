@@ -33,7 +33,7 @@ Drawer {
     //
     implicitHeight: app.effectiveHeight
     implicitWidth: Math.min (parent.width > parent.height ? 320 : 280,
-                             Math.min (parent.width, parent.height) * 0.90)
+                                                            Math.min (parent.width, parent.height) * 0.90)
 
     //
     // Icon properties
@@ -54,8 +54,51 @@ Drawer {
     //     - separatorText: optional text for the separator item
     //     - pageIcon: the source of the image to display next to the title
     //
-    property alias pages: listView.model
-    property alias pageIndex: listView.currentIndex
+    property alias items: listView.model
+    property alias index: listView.currentIndex
+
+    //
+    // Execute appropiate action when the index changes
+    //
+    onIndexChanged: {
+        var isSpacer = false
+        var isSeparator = false
+        var item = items.get (index)
+
+        if (typeof (item) !== "undefined") {
+            if (typeof (item.spacer) !== "undefined")
+                isSpacer = item.spacer
+
+            if (typeof (item.separator) !== "undefined")
+                isSpacer = item.separator
+
+            if (!isSpacer && !isSeparator)
+                actions [index]()
+        }
+    }
+
+    //
+    // A list with functions that correspond with the index of each drawer item
+    // provided with the \a pages property
+    //
+    // For a string-based example, check this SO answer:
+    //     https://stackoverflow.com/a/26731377
+    //
+    // The only difference is that we are working with the index of each element
+    // in the list view, for example, if you want to define the function to call
+    // when the first item of the drawer is clicked, you should write:
+    //
+    //     actions: {
+    //         0: function() {
+    //             console.log ("First item clicked!")
+    //         },
+    //
+    //         1: function() {}...,
+    //         2: function() {}...,
+    //         n: function() {}...
+    //     }
+    //
+    property var actions
 
     //
     // Main layout of the drawer
@@ -150,7 +193,7 @@ Drawer {
             Component.onCompleted: currentIndex = 0
 
             delegate: DrawerItem {
-                model: pages
+                model: items
                 width: parent.width
                 pageSelector: listView
 

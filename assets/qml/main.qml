@@ -97,7 +97,7 @@ ApplicationWindow {
     //
     // Opens a link that allows the user to rate the application
     //
-    function openRate() {
+    function rateApp() {
         if (Qt.platform.os === "android")
             Qt.openUrlExternally ("market://details?id=" + AppId)
         else
