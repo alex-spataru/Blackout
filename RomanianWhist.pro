@@ -34,7 +34,7 @@ OBJECTS_DIR = obj
 #-------------------------------------------------------------------------------
 
 TEMPLATE = app
-TARGET = whist-score-keeper
+TARGET = romanian-whist
 
 CONFIG += qtc_runnable
 CONFIG += resources_big
@@ -93,7 +93,7 @@ linux:!android {
 
 android {
     #android:DEFINES += NO_ADS
-    android:DEFINES += REAL_ADS
+    #android:DEFINES += REAL_ADS
     #android:DEFINES += TEST_ADS
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/deploy/android
